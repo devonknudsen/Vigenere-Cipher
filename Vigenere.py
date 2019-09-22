@@ -103,6 +103,7 @@ def CharValue(int, case):
 
 #f = sys.stdin.read()
 
+
 # remove spaces from key (can also be done in cipher/decipher functions)
 key = sys.argv[2]
 key = key.replace(" ", "")
@@ -111,47 +112,69 @@ key = key.replace(" ", "")
 if (sys.argv[1] == "-e"):
     
     while(True):
-        cipherText = ""
-        plainText = input()
-        plainTextList = list(plainText)
-        
-        # encipher plain text into a list of integers
-        intList = Cipher(plainText, key)
-        
-        
-        # convert each integer into it's mapped letter of the alphabet
-        for i in range(0, len(intList)):
-        
-            # check if the object is an integer
-            # if so, convert to letter
-            if(isinstance(intList[i], int)):
-                cipherText += str(CharValue(intList[i], plainTextList[i].islower()))
+        #used try, except to prevent keyboardInterruption error thrown
+        try:
+            cipherText = ""
+            plainText = input()
+            plainTextList = list(plainText)
             
-            # else, add symbol/numerical value
-            else: 
-                cipherText += intList[i]
-        print(cipherText)
+            # encipher plain text into a list of integers
+            intList = Cipher(plainText, key)
+            
+            
+            # convert each integer into it's mapped letter of the alphabet
+            for i in range(0, len(intList)):
+            
+                # check if the object is an integer
+                # if so, convert to letter
+                if(isinstance(intList[i], int)):
+                    cipherText += str(CharValue(intList[i], plainTextList[i].islower()))
+                
+                # else, add symbol/numerical value
+                else: 
+                    cipherText += intList[i]
+            print(cipherText)
+            
+        except KeyboardInterrupt:
+        #this will exit if the user does ^d, or ^z, ^c, or whatever their system's exit is
+            sys.exit(1)
+
+        #this will catch the EOF error (EOF - End of file)
+        # we're getting this error because we're not using stdin    
+        except EOFError:
+            break
+
       
 # if want to decrypt a cipher text      
 elif (sys.argv[1] == "-d"):
     while(True):
-        plainText = ""
-        cipherText = input()
-        plainTextList = list(cipherText)
-        
-        # decipher cipher text into a list of integers
-        intList = Decipher(cipherText, key)
-        
-        # convert each integer into it's mapped letter of the alphabet
-        for i in range(0, len(intList)):
-        
-            # check if the object is an integer
-            # if so, convert to letter
-            if(isinstance(intList[i], int)):
-                plainText += str(CharValue(intList[i], plainTextList[i].islower()))
+        #used try, except to prevent keyboardInterruption error thrown
+        try:
+            plainText = ""
+            cipherText = input()
+            plainTextList = list(cipherText)
             
-            # else, add symbol/numerical value
-            else:
-                plainText += intList[i]
-        print(plainText)
-        
+            # decipher cipher text into a list of integers
+            intList = Decipher(cipherText, key)
+            
+            # convert each integer into it's mapped letter of the alphabet
+            for i in range(0, len(intList)):
+            
+                # check if the object is an integer
+                # if so, convert to letter
+                if(isinstance(intList[i], int)):
+                    plainText += str(CharValue(intList[i], plainTextList[i].islower()))
+                
+                # else, add symbol/numerical value
+                else:
+                    plainText += intList[i]
+            print(plainText)
+
+        except KeyboardInterrupt:
+        #this will exit if the user does ^d, or ^z, ^c, or whatever their system's exit is
+            sys.exit(1)
+
+        #this will catch the EOF error (EOF - End of file)
+        # we're getting this error because we're not using stdin    
+        except EOFError:
+            break

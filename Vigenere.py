@@ -1,4 +1,6 @@
-# Written in Python 3.7.
+# Persians: Sydney Anderson, Tram Doan, Devon Knudsen, Zackary Phillips, Promyse Ward, James Wilson
+# GitHub Repo: https://github.com/devonknudsen/Vigenere-Cipher
+# Written in Python 3.7
 
 import sys
 import enum
@@ -30,7 +32,9 @@ def Cipher(plainText, key):
         # else: add symbol/numerical value
         else:
             c_int = P[i]
+
         C.append(c_int)
+
     return C
     
 # decrypts cipher text to plain text
@@ -56,10 +60,12 @@ def Decipher(cipherText, key):
             p_int = (Ci - Ki + 26)%26
             x += 1
             
-        # else: add symbol/nplainTextListerical value
+        # else: add symbol/plainTextList value
         else:
             p_int = C[i]
+
         P.append(p_int)
+
     return P
 
 # returns the number value of a letter
@@ -92,17 +98,8 @@ def CharValue(int, case):
     # return letter in alphabet
     return alphabet[int]
 
+
 # MAIN CODE #
-
-######## TODO ###################################
-# Need to have way to: 
-# accept input from user (current way)
-# AND 
-# accept file from command line (statement below)
-##################################################
-
-#f = sys.stdin.read()
-
 
 # remove spaces from key (can also be done in cipher/decipher functions)
 key = sys.argv[2]
@@ -112,7 +109,8 @@ key = key.replace(" ", "")
 if (sys.argv[1] == "-e"):
     
     while(True):
-        #used try, except to prevent keyboardInterruption error thrown
+
+        # used try, except to prevent keyboardInterruption error thrown
         try:
             cipherText = ""
             plainText = input()
@@ -133,13 +131,14 @@ if (sys.argv[1] == "-e"):
                 # else, add symbol/numerical value
                 else: 
                     cipherText += intList[i]
+
             print(cipherText)
             
         except KeyboardInterrupt:
-        #this will exit if the user does ^d, or ^z, ^c, or whatever their system's exit is
+        # this will exit if the user does ^d, or ^z, ^c, or whatever their system's exit is
             sys.exit(1)
 
-        #this will catch the EOF error (EOF - End of file)
+        # this will catch the EOF error (EOF - End of file)
         # we're getting this error because we're not using stdin    
         except EOFError:
             break
@@ -148,7 +147,7 @@ if (sys.argv[1] == "-e"):
 # if want to decrypt a cipher text      
 elif (sys.argv[1] == "-d"):
     while(True):
-        #used try, except to prevent keyboardInterruption error thrown
+        # used try, except to prevent keyboardInterruption error thrown
         try:
             plainText = ""
             cipherText = input()
@@ -167,14 +166,15 @@ elif (sys.argv[1] == "-d"):
                 
                 # else, add symbol/numerical value
                 else:
-                    plainText += intList[i]
+                    plainText += intList[i
+]
             print(plainText)
 
         except KeyboardInterrupt:
-        #this will exit if the user does ^d, or ^z, ^c, or whatever their system's exit is
+        # this will exit if the user does ^d, or ^z, ^c, or whatever their system's exit is
             sys.exit(1)
 
-        #this will catch the EOF error (EOF - End of file)
+        # this will catch the EOF error (EOF - End of file)
         # we're getting this error because we're not using stdin    
         except EOFError:
             break
